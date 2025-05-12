@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Solana New Coins</title>
+  <title>Top 20 New Solana Coins</title>
 </head>
 <body>
-  <h1>🚀 Top 20 New Coins on Solana</h1>
-  <p>Coming soon...</p>
+  <h1>🚀 Live: Top 20 New Solana Tokens</h1>
+  <table border="1" id="token-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price (USD)</th>
+        <th>Volume (1h)</th>
+        <th>Age</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.querySelector("#token-table tbody");
+        tableBody.innerHTML = "";
+        data.forEach(token => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${token.name}</td>
+            <td>${token.price}</td>
+            <td>${token.volume}</td>
+            <td>${token.age}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(err => {
+        console.error("Failed to load data.json:", err);
+      });
+  </script>
 </body>
 </html>
-Initial commit with index.html
